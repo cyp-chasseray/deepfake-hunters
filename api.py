@@ -37,8 +37,8 @@ def index():
 # # response.json() #=> {wait: 64}
 
 @app.get('/predict')
-def predict_api():
-    test_img = imread("./Images/fake2.jpg")
+def predict_api(image):
+    test_img = imread(image)
     test_img_resized = resize(test_img, [224,224])
     test_img_resized_scaled = test_img_resized/255.
     image_final = expand_dims(test_img_resized_scaled, 0)

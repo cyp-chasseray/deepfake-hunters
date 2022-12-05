@@ -39,14 +39,17 @@ if url == 'http://127.0.0.1:8000/predict':
 
 if st.button('predict'):
 
-    # headers = {'Content-Type': 'image/jpeg'}
-    response = requests.get(url,params={"image":uploaded_files}) # headers=headers)
-    wb = response.json()
+    files={'image' : uploaded_files}
 
-    # '''4. Let's retrieve the prediction from the **JSON** returned by the API...
-
-    # ## Finally, we can display the prediction to the user
-    # '''
-    st.write('the prediction  is ', wb['result'])
+    response = requests.post(url, files=files)
+    if response.status_code == 200:
+        wb = response.json()
+        # wb = response.text
+        # st.write(wb + '  ' + str(response.status_code)
+        # st.write('the prediction  is ', wb['result'])
+        st.write('the prediction  is ', wb["result"])
+    else:
+        st.write('the response.status_code  is ', str(response.status_code) + '   ' + response.text)
+        st.write('the response.status_code  is ', str(response.status_code) + '   ' + uploaded_files.name)
 else:
         st.write('I was not clicked 😞')

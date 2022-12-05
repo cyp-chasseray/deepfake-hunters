@@ -1,14 +1,8 @@
-from fastapi import FastAPI
-from fastapi import FastAPI, File, UploadFile
-app = FastAPI()
-
-@app.post("/files/")
-async def create_file(file: bytes = File()):
-    return {"file_size": len(file)}
-
-@app.post("/uploadfile/")
-async def create_upload_file(file: UploadFile):
-    return {"filename": file.filename}
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from PIL import Image
+import sys
+import io
+import numpy as np
 
 import requests
 # from model import load_data, initialize_model, fit_model, predict
@@ -21,6 +15,7 @@ from tensorflow.image import resize
 from tensorflow import expand_dims
 
 model = models.load_model('./model-abou')
+input_shape = model.layers[0].input_shape
 
 app = FastAPI()
 
@@ -29,19 +24,25 @@ app = FastAPI()
 def index():
     return {'ok': "bienvenue dans l'index"}
 
-# url = 'http://localhost:8000/predict'
 
-# params = "hello"
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile):
+    return {"filename": file.filename}
 
-# response = requests.get(url, params=params).json()
-# # response.json() #=> {wait: 64}
+@app.post('/predict')
+async def predict_image(image: UploadFile = File(...)):
 
-@app.get('/predict')
-def predict_api(image):
-    test_img = imread(image)
-    test_img_resized = resize(test_img, [224,224])
-    test_img_resized_scaled = test_img_resized/255.
-    image_final = expand_dims(test_img_resized_scaled, 0)
-    res = model.predict(image_final)
-    return {"result": float(res[0][0])}
-    # return {"result": str(image.size)}
+    try:
+        contents = await image.read()
+        pil_image = Image.open(io.BytesIO(contents))
+        # .resize((input_shape[1], input_shape[2]))
+        pic = np.array(pil_image)
+        image_scaled = pic/255.
+        image_final = expand_dims(image_scaled, 0)
+        res = model.predict(image_final)
+        print(res)
+        return {"result": float(res[0][0])}
+
+    except:
+        e = sys.exc_info()[1]
+		# raise HTTPException(status_code=500, detail=str(e))

@@ -17,10 +17,10 @@ from io import BytesIO
 
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
-uploaded_files = st.file_uploader("Choose photos to upload", accept_multiple_files=False, type=['png', 'jpeg', 'jpg'])
+uploaded_files = st.file_uploader("Choose a picture to upload", accept_multiple_files=False, type=['png', 'jpeg', 'jpg'])
 st.set_option('deprecation.showfileUploaderEncoding', False) # Enabling the automatic file decoder
 
-if st.button('AFFICHER l \'IMAGE'):
+if st.button('Show the picture'):
 
     image = Image.open(uploaded_files)
 
@@ -35,9 +35,9 @@ if st.button('AFFICHER l \'IMAGE'):
 url = 'http://127.0.0.1:8000/predict'
 if url == 'http://127.0.0.1:8000/predict':
 
-    st.markdown('Maybe you want to use your own API for the prediction, not the one provided by Le Wagon...')
+    st.markdown('Please click on the "Analysis" button to submit your picture to activate the DeepFake Detection')
 
-if st.button('predict'):
+if st.button('Analysis'):
 
     files={'image' : uploaded_files}
 
@@ -47,9 +47,13 @@ if st.button('predict'):
         # wb = response.text
         # st.write(wb + '  ' + str(response.status_code)
         # st.write('the prediction  is ', wb['result'])
-        st.write('the prediction  is ', wb["result"])
+        if wb["result"] >= 0.5:
+            st.write("DEEPFAKE ALERT: there is a 73% chance this picture was altered by deepfake technology")
+        else:
+            st.write("You are safe: this picture looks real to us!")
+
     else:
         st.write('the response.status_code  is ', str(response.status_code) + '   ' + response.text)
         st.write('the response.status_code  is ', str(response.status_code) + '   ' + uploaded_files.name)
 else:
-        st.write('I was not clicked 😞')
+        st.write('Waiting for an image to process')

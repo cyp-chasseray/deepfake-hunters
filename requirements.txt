@@ -35,6 +35,7 @@ s3fs
 fastapi
 pytz
 uvicorn
+streamlit
 
 python-dotenv
 prefect<2

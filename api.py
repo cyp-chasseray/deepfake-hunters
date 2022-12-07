@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import expand_dims
 
-model = tf.keras.models.load_model('./raw_data/saved_model/model')
+model = tf.keras.models.load_model('./model')
 input_shape = model.layers[0].input_shape
 
 app = FastAPI()

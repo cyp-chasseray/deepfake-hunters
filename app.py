@@ -9,7 +9,7 @@ import io
 
 '''
 
-url = 'http://127.0.0.1:8000/predict'
+url = 'https://deepfakehuntersdef-bnv74lx52q-nw.a.run.app/predict'
 
 uploaded_files = st.file_uploader("Choose photos to upload", accept_multiple_files=False, type=['png', 'jpeg', 'jpg'])
 if uploaded_files is not None:

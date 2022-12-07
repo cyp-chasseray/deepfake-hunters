@@ -36,6 +36,7 @@ fastapi
 pytz
 uvicorn
 streamlit
+python-multipart
 
 python-dotenv
 prefect<2

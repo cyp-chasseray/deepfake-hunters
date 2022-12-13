@@ -1,73 +1,7 @@
-# Data analysis
-- Document here the project: deepfake-hunters
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+Final project of my Data Science Bootcamp. 
 
-Please document the project the better you can.
+We coded a cool Deepfake detector app. Feed it an image and know if the image is real of if it has been altered by deepfake technology.
 
-# Startup the project
+We used Python as a language, Tensoflow to build our model, Fast API for the API and Streamlit for the simple web app. Our accuracy is 75%.
 
-The initial setup.
-
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
-
-Unittest test:
-```bash
-make clean install test
-```
-
-Check for deepfake-hunters in github.com/{group}. If your project is not set please add it:
-
-Create a new project on github.com/{group}/deepfake-hunters
-Then populate it:
-
-```bash
-##   e.g. if group is "{group}" and project_name is "deepfake-hunters"
-git remote add origin git@github.com:{group}/deepfake-hunters.git
-git push -u origin master
-git push -u origin --tags
-```
-
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-deepfake-hunters-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/deepfake-hunters` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/deepfake-hunters.git
-cd deepfake-hunters
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-deepfake-hunters-run
-```
+Raw data can be downloaded here: https://www.kaggle.com/datasets/dagnelies/deepfake-faces

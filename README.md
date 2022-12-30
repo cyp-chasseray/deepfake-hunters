@@ -1,4 +1,4 @@
-Final project of my Data Science Bootcamp. 
+Final project of the Data Science Bootcamp. 
 
 We coded a cool Deepfake detector app. Feed it an image and know if the image is real of if it has been altered by deepfake technology.
 
